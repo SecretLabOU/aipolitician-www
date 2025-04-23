@@ -107,12 +107,116 @@
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-three-quarters">
-          <div class="video-container">
-            <video controls>
-              <source src="static/videos/banner_video.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+          <!-- AI Politician Chat Interface - replacing video -->
+          <div class="box" style="border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); padding: 0; overflow: hidden; border: 1px solid #e5e5e5;">
+            <!-- Header with Politician Selection -->
+            <div class="px-4 py-2" style="border-bottom: 1px solid #f0f0f0; background-color: #ffffff;">
+              <div class="is-flex is-justify-content-center" style="gap: 24px; margin-bottom: 0;">
+                <!-- Trump (selected) -->
+                <div class="has-text-centered" style="position: relative;">
+                  <figure class="image is-48x48 mx-auto mb-1" style="cursor: pointer; border: 3px solid #3273dc; border-radius: 50%; overflow: hidden;">
+                    <img src="static/images/trump.jpeg" alt="Donald Trump" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
+                  </figure>
+                  <span class="has-text-weight-medium is-size-7 d-block">Trump</span>
+                  <span class="icon has-text-success" style="position: absolute; bottom: 15px; right: 0;">
+                    <i class="fas fa-check-circle"></i>
+                  </span>
+                </div>
+                
+                <!-- Biden -->
+                <div class="has-text-centered">
+                  <figure class="image is-48x48 mx-auto mb-1" style="cursor: pointer; border: 3px solid transparent; border-radius: 50%; overflow: hidden;">
+                    <img src="static/images/biden.jpeg" alt="Joe Biden" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
+                  </figure>
+                  <span class="has-text-weight-medium is-size-7 d-block">Biden</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Chat Area -->
+            <div style="height: 440px; overflow-y: auto; background-color: #ffffff; padding-bottom: 10px;">
+              <!-- System Message -->
+              <div class="px-4 py-3" style="display: flex; justify-content: center;">
+                <div style="background-color: #f7f7f8; padding: 8px 16px; border-radius: 8px; max-width: 85%;">
+                  <p class="is-size-7 has-text-grey">You are now chatting with Donald Trump. Ask any policy question or discuss current events.</p>
+                </div>
+              </div>
+              
+              <!-- User Message -->
+              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
+                <div style="max-width: 85%;">
+                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
+                    <p>What's your position on climate change?</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- AI Response - Trump -->
+              <div class="px-5 py-3" style="display: flex;">
+                <img src="static/images/trump.jpeg" alt="Trump" style="height: 32px; width: 32px; border-radius: 4px; margin-right: 12px; margin-top: 3px;" onerror="this.src='https://bulma.io/images/placeholders/32x32.png'">
+                <div style="max-width: 85%;">
+                  <div style="padding: 12px 16px; border-radius: 8px; background-color: #f7f7f8;">
+                    <p>Look, climate change. People are talking about it, but let me tell you, we have to be smart about this. Very smart. We can't destroy American jobs with terrible deals like the Paris Accord. The biggest polluters? China, India - they get to do whatever they want while we suffer.</p>
+                    <p class="mt-2">I believe in crystal clean water, crystal clean air. America has some of the cleanest air in the world right now, and it's getting better. But we need to approach this in a way that doesn't kill our economy. Our beautiful coal miners, our energy workers - we can't leave them behind.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- User Message -->
+              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
+                <div style="max-width: 85%;">
+                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
+                    <p>I'd like to hear Biden's perspective on the same issue.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- System Message -->
+              <div class="px-4 py-3" style="display: flex; justify-content: center;">
+                <div style="background-color: #f7f7f8; padding: 8px 16px; border-radius: 8px; max-width: 85%;">
+                  <p class="is-size-7 has-text-grey">Switching to Joe Biden</p>
+                </div>
+              </div>
+              
+              <!-- AI Response - Biden -->
+              <div class="px-5 py-3" style="display: flex;">
+                <img src="static/images/biden.jpeg" alt="Biden" style="height: 32px; width: 32px; border-radius: 4px; margin-right: 12px; margin-top: 3px;" onerror="this.src='https://bulma.io/images/placeholders/32x32.png'">
+                <div style="max-width: 85%;">
+                  <div style="padding: 12px 16px; border-radius: 8px; background-color: #f7f7f8;">
+                    <p>Climate change is an existential threat to our future. It's not just an environmental issue, but an economic one, a health one, a national security issue, and a justice issue. And we're seeing the effects right now - more intense storms, longer wildfire seasons, record floods.</p>
+                    <p class="mt-2">My administration committed to a 50-52% reduction in greenhouse gas pollution by 2030. We rejoined the Paris Agreement on day one. This isn't just about saving the planet - it's about creating good-paying, union jobs in clean energy. We're making historic investments in infrastructure to build a more resilient future and lead the clean energy economy.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- User Message -->
+              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
+                <div style="max-width: 85%;">
+                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
+                    <p>Let's start a debate between Trump and Biden on energy policy.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="px-4 py-3" style="border-top: 1px solid #f0f0f0; background-color: #ffffff;">
+              <div class="field has-addons">
+                <div class="control is-expanded">
+                  <textarea class="textarea" placeholder="Type your message..." rows="1" style="border-radius: 8px; border-color: #e0e0e0; box-shadow: none; resize: none;"></textarea>
+                </div>
+                <div class="control">
+                  <button class="button" style="border-radius: 8px; background-color: #f5f5f5; margin-left: 8px; height: 100%;">
+                    <span class="icon">
+                      <i class="fas fa-paper-plane"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- End AI Politician Chat Interface -->
+
           <div class="content">
             <p class="is-size-5">
               <em>The AI Politician project develops fine-tuned language models that accurately simulate political figures' communication styles, rhetorical patterns, and policy positions through parameter-efficient adaptation. Our system enables natural dialogue interactions, structured debates, and fact-grounded responses using retrieval-augmented generation.</em>
@@ -132,7 +236,7 @@
           <h2 class="title is-3 has-text-centered">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Political discourse simulation presents unique challenges for language models due to the need for accurate representation of individual communication styles, consistent policy positions, and factual grounding. In this research, we introduce AI Politician—a system of fine-tuned <strong>Mistral-7B</strong> language models designed to faithfully recreate political discourse. We employ <strong>LoRA</strong> adapters and <strong>Retrieval-Augmented Generation (RAG)</strong> to enable efficient adaptation while maintaining factual accuracy. Our methodology combines parameter-efficient fine-tuning on political speech corpora with context-aware knowledge retrieval to produce coherent, personalized responses that maintain the distinct communication characteristics of specific political figures. We demonstrate the system's capabilities through one-on-one interactions, moderated debates, and issue-specific policy discussions, highlighting both the potential applications and ethical considerations of political AI simulations.
+              Political discourse simulation presents unique challenges for language models due to the need for accurate representation of individual communication styles, consistent policy positions, and factual grounding. In this research, we introduce AI Politician—a system of fine-tuned <strong>Mistral-7B</strong> language models designed to recreate political discourse. We employ <strong>LoRA</strong> adapters and <strong>Retrieval-Augmented Generation (RAG)</strong> to enable efficient adaptation while maintaining factual accuracy. Our methodology combines parameter-efficient fine-tuning on political speech corpora with context-aware knowledge retrieval to produce coherent, personalized responses that maintain the distinct communication characteristics of specific political figures. We demonstrate the system's capabilities through one-on-one interactions, moderated debates, and issue-specific policy discussions, highlighting both the potential applications and ethical considerations of political AI simulations.
             </p>
           </div>
         </div>
@@ -223,232 +327,6 @@
     </div>
   </section>
   <!-- End Methodology -->
-
-  <!-- AI Politician Chat Interface -->
-  <section class="section hero is-white">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="box" style="border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); padding: 0; overflow: hidden; border: 1px solid #e5e5e5;">
-            <!-- Header with Politician Selection -->
-            <div class="px-4 py-3" style="border-bottom: 1px solid #f0f0f0; background-color: #ffffff;">
-              <div class="is-flex is-justify-content-space-between is-align-items-center">
-                <p class="has-text-weight-medium">Select politicians:</p>
-                <div class="is-flex">
-                  <button class="button is-small is-light" title="Clear selection">
-                    <span class="icon is-small">
-                      <i class="fas fa-sync-alt"></i>
-                    </span>
-                    <span>Reset</span>
-                  </button>
-                </div>
-              </div>
-              
-              <div class="is-flex is-flex-wrap-wrap is-justify-content-center mt-2" style="gap: 12px;">
-                <!-- Trump (selected) -->
-                <div class="has-text-centered" style="position: relative;">
-                  <figure class="image is-48x48 mx-auto" style="cursor: pointer; border: 3px solid #3273dc; border-radius: 50%; overflow: hidden;">
-                    <img src="static/images/trump.jpeg" alt="Donald Trump" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
-                  </figure>
-                  <span class="has-text-weight-medium is-size-7 mt-1 d-block">Trump</span>
-                  <span class="icon has-text-success" style="position: absolute; bottom: 15px; right: 0;">
-                    <i class="fas fa-check-circle"></i>
-                  </span>
-                </div>
-                
-                <!-- Biden -->
-                <div class="has-text-centered">
-                  <figure class="image is-48x48 mx-auto" style="cursor: pointer; border: 3px solid transparent; border-radius: 50%; overflow: hidden;">
-                    <img src="static/images/biden.jpeg" alt="Joe Biden" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
-                  </figure>
-                  <span class="has-text-weight-medium is-size-7 mt-1 d-block">Biden</span>
-                </div>
-                
-                <!-- Sanders -->
-                <div class="has-text-centered">
-                  <figure class="image is-48x48 mx-auto" style="cursor: pointer; border: 3px solid transparent; border-radius: 50%; overflow: hidden;">
-                    <img src="static/images/sanders.jpeg" alt="Bernie Sanders" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
-                  </figure>
-                  <span class="has-text-weight-medium is-size-7 mt-1 d-block">Sanders</span>
-                </div>
-                
-                <!-- Obama -->
-                <div class="has-text-centered">
-                  <figure class="image is-48x48 mx-auto" style="cursor: pointer; border: 3px solid transparent; border-radius: 50%; overflow: hidden;">
-                    <img src="static/images/obama.jpeg" alt="Barack Obama" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
-                  </figure>
-                  <span class="has-text-weight-medium is-size-7 mt-1 d-block">Obama</span>
-                </div>
-                
-                <!-- AOC -->
-                <div class="has-text-centered">
-                  <figure class="image is-48x48 mx-auto" style="cursor: pointer; border: 3px solid transparent; border-radius: 50%; overflow: hidden;">
-                    <img src="static/images/aoc.jpeg" alt="Alexandria Ocasio-Cortez" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
-                  </figure>
-                  <span class="has-text-weight-medium is-size-7 mt-1 d-block">AOC</span>
-                </div>
-                
-                <!-- More -->
-                <div class="has-text-centered">
-                  <figure class="image is-48x48 mx-auto has-background-light" style="cursor: pointer; border: 3px solid transparent; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                    <span class="icon">
-                      <i class="fas fa-ellipsis-h"></i>
-                    </span>
-                  </figure>
-                  <span class="has-text-weight-medium is-size-7 mt-1 d-block">More</span>
-                </div>
-              </div>
-              
-              <div class="is-flex is-justify-content-center mt-3">
-                <div class="buttons has-addons">
-                  <button class="button is-small is-primary is-selected">Single Chat</button>
-                  <button class="button is-small">Debate Mode</button>
-                  <button class="button is-small">Moderated Debate</button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Chat Area -->
-            <div style="height: 440px; overflow-y: auto; background-color: #ffffff; padding-bottom: 10px;">
-              <!-- System Message -->
-              <div class="px-4 py-3" style="display: flex; justify-content: center;">
-                <div style="background-color: #f7f7f8; padding: 8px 16px; border-radius: 8px; max-width: 85%;">
-                  <p class="is-size-7 has-text-grey">You are now chatting with Donald Trump. Ask any policy question or discuss current events.</p>
-                </div>
-              </div>
-              
-              <!-- User Message -->
-              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
-                <div style="max-width: 85%;">
-                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
-                    <p>What's your position on climate change?</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- AI Response - Trump -->
-              <div class="px-5 py-3" style="display: flex;">
-                <img src="static/images/trump.jpeg" alt="Trump" style="height: 32px; width: 32px; border-radius: 4px; margin-right: 12px; margin-top: 3px;" onerror="this.src='https://bulma.io/images/placeholders/32x32.png'">
-                <div style="max-width: 85%;">
-                  <div style="padding: 12px 16px; border-radius: 8px; background-color: #f7f7f8;">
-                    <p>Look, climate change. People are talking about it, but let me tell you, we have to be smart about this. Very smart. We can't destroy American jobs with terrible deals like the Paris Accord. The biggest polluters? China, India - they get to do whatever they want while we suffer.</p>
-                    <p class="mt-2">I believe in crystal clean water, crystal clean air. America has some of the cleanest air in the world right now, and it's getting better. But we need to approach this in a way that doesn't kill our economy. Our beautiful coal miners, our energy workers - we can't leave them behind.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- User Message -->
-              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
-                <div style="max-width: 85%;">
-                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
-                    <p>I'd like to hear Biden's perspective on the same issue.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- System Message -->
-              <div class="px-4 py-3" style="display: flex; justify-content: center;">
-                <div style="background-color: #f7f7f8; padding: 8px 16px; border-radius: 8px; max-width: 85%;">
-                  <p class="is-size-7 has-text-grey">Switching to Joe Biden</p>
-                </div>
-              </div>
-              
-              <!-- AI Response - Biden -->
-              <div class="px-5 py-3" style="display: flex;">
-                <img src="static/images/biden.jpeg" alt="Biden" style="height: 32px; width: 32px; border-radius: 4px; margin-right: 12px; margin-top: 3px;" onerror="this.src='https://bulma.io/images/placeholders/32x32.png'">
-                <div style="max-width: 85%;">
-                  <div style="padding: 12px 16px; border-radius: 8px; background-color: #f7f7f8;">
-                    <p>Climate change is an existential threat to our future. It's not just an environmental issue, but an economic one, a health one, a national security issue, and a justice issue. And we're seeing the effects right now - more intense storms, longer wildfire seasons, record floods.</p>
-                    <p class="mt-2">My administration committed to a 50-52% reduction in greenhouse gas pollution by 2030. We rejoined the Paris Agreement on day one. This isn't just about saving the planet - it's about creating good-paying, union jobs in clean energy. We're making historic investments in infrastructure to build a more resilient future and lead the clean energy economy.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- User Message -->
-              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
-                <div style="max-width: 85%;">
-                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
-                    <p>Let's start a debate between Trump and Biden on energy policy.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Input Area -->
-            <div class="px-4 py-3" style="border-top: 1px solid #f0f0f0; background-color: #ffffff;">
-              <div class="field">
-                <div class="control">
-                  <textarea class="textarea" placeholder="Type your message..." rows="1" style="border-radius: 8px; border-color: #e0e0e0; box-shadow: none; resize: none;"></textarea>
-                </div>
-              </div>
-              
-              <div class="level is-mobile mt-2">
-                <div class="level-left">
-                  <div class="level-item">
-                    <button class="button is-text" title="Voice input">
-                      <span class="icon">
-                        <i class="fas fa-microphone has-text-grey"></i>
-                      </span>
-                    </button>
-                    <button class="button is-text" title="Attach files">
-                      <span class="icon">
-                        <i class="fas fa-paperclip has-text-grey"></i>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-                <div class="level-right">
-                  <div class="level-item">
-                    <button class="button is-primary" style="border-radius: 6px;">
-                      <span class="icon">
-                        <i class="fas fa-paper-plane"></i>
-                      </span>
-                      <span>Send</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Example Debate Explanation -->
-          <div class="mt-5">
-            <h3 class="title is-5 has-text-centered">How AI Politician Debates Work</h3>
-            <div class="columns is-centered mt-3">
-              <div class="column is-4">
-                <div class="box has-text-centered" style="height: 100%;">
-                  <span class="icon is-large has-text-primary mb-2">
-                    <i class="fas fa-comments fa-2x"></i>
-                  </span>
-                  <h4 class="title is-6">Single Chat</h4>
-                  <p class="is-size-7">Converse with individual politicians to explore their unique perspectives on specific issues</p>
-                </div>
-              </div>
-              <div class="column is-4">
-                <div class="box has-text-centered" style="height: 100%;">
-                  <span class="icon is-large has-text-primary mb-2">
-                    <i class="fas fa-exchange-alt fa-2x"></i>
-                  </span>
-                  <h4 class="title is-6">Direct Debate</h4>
-                  <p class="is-size-7">Watch politicians respond to each other directly on the same topics</p>
-                </div>
-              </div>
-              <div class="column is-4">
-                <div class="box has-text-centered" style="height: 100%;">
-                  <span class="icon is-large has-text-primary mb-2">
-                    <i class="fas fa-microphone-alt fa-2x"></i>
-                  </span>
-                  <h4 class="title is-6">Moderated Debate</h4>
-                  <p class="is-size-7">Experience a formal debate with moderated questions and timed responses</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End AI Politician Chat Interface -->
 
   <!-- Experiments -->
   <section class="section">
