@@ -340,43 +340,101 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Experimental Results</h2>
-          
-          <h3 class="title is-4">Fine-tuning Performance</h3>
-          <div class="content">
-            <p>
-              Our models showed significant improvements in personalization metrics after fine-tuning, with minimal loss of general capabilities:
-            </p>
-            <ul>
-              <li><strong>Style Matching Score:</strong> 78.6% improvement over baseline</li>
-              <li><strong>Policy Consistency:</strong> 82.3% alignment with documented positions</li>
-              <li><strong>Response Coherence:</strong> 91.2% evaluator preference vs. non-personalized baseline</li>
-            </ul>
+          <h2 class="title is-3 has-text-centered mb-5">Experimental Results</h2>
+
+          <!-- Card 1: Fine-tuning Performance -->
+          <div class="box" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background-color: #ffffff; padding: 2rem; margin-bottom: 2rem;">
+            <h3 class="title is-4 has-text-centered mb-4">Fine-tuning Performance</h3>
+            <div class="content">
+              <p class="has-text-centered is-size-6 has-text-grey mb-4">
+                Models showed significant improvements in personalization metrics after fine-tuning, with minimal loss of general capabilities:
+              </p>
+              <!-- Replace UL with Columns for Images -->
+              <div class="columns is-mobile is-multiline is-centered is-variable is-2">
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/style_matching_score.png" alt="Style Matching Score: 78.6% improvement">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Style Matching Score<br>78.6% Improvement</p>
+                </div>
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/policy_consistency.png" alt="Policy Consistency: 82.3% alignment">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Policy Consistency<br>82.3% Alignment</p>
+                </div>
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/response_coherence.png" alt="Response Coherence: 91.2% preference">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Response Coherence<br>91.2% Preference</p>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          <h3 class="title is-4">RAG Integration Effectiveness</h3>
-          <div class="content">
-            <p>
-              The retrieval-augmented generation significantly enhanced factual accuracy:
-            </p>
-            <ul>
-              <li><strong>Factual Precision:</strong> 87.4% with RAG vs. 63.5% without</li>
-              <li><strong>Source Attribution:</strong> Proper attribution in 92.7% of factual statements</li>
-              <li><strong>Temporal Awareness:</strong> Correct temporal context in 89.1% of historical references</li>
-            </ul>
+
+          <!-- Card 2: RAG Integration Effectiveness -->
+          <div class="box" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background-color: #ffffff; padding: 2rem; margin-bottom: 2rem;">
+            <h3 class="title is-4 has-text-centered mb-4">RAG Integration Effectiveness</h3>
+            <div class="content">
+              <p class="has-text-centered is-size-6 has-text-grey mb-4">
+                Retrieval-augmented generation significantly enhanced factual accuracy:
+              </p>
+              <!-- Replace UL with Columns for Images -->
+              <div class="columns is-mobile is-multiline is-centered is-variable is-2">
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/factual_precision.png" alt="Factual Precision: 87.4% with RAG vs 63.5% without">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Factual Precision<br>87.4% (RAG) vs 63.5%</p>
+                </div>
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/source_attribution.png" alt="Source Attribution: 92.7% proper attribution">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Source Attribution<br>92.7% Attribution</p>
+                </div>
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/temporal_awareness.png" alt="Temporal Awareness: 89.1% correct context">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Temporal Awareness<br>89.1% Correct Context</p>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          <h3 class="title is-4">Debate Simulation Quality</h3>
-          <div class="content">
-            <p>
-              Moderated debates between AI Politicians demonstrated:
-            </p>
-            <ul>
-              <li><strong>Character Consistency:</strong> 94.8% evaluator agreement on authentic representation</li>
-              <li><strong>Conversational Flow:</strong> 88.7% coherence rating across multi-turn exchanges</li>
-              <li><strong>Rhetorical Pattern Matching:</strong> 83.2% similarity to reference debate transcripts</li>
-            </ul>
+
+          <!-- Card 3: Debate Simulation Quality -->
+          <div class="box" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background-color: #ffffff; padding: 2rem;">
+            <h3 class="title is-4 has-text-centered mb-4">Debate Simulation Quality</h3>
+            <div class="content">
+              <p class="has-text-centered is-size-6 has-text-grey mb-4">
+                Moderated debates between AI Politicians demonstrated:
+              </p>
+              <!-- Replace UL with Columns for Images -->
+              <div class="columns is-mobile is-multiline is-centered is-variable is-2">
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/character_consistency.png" alt="Character Consistency: 94.8% agreement">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Character Consistency<br>94.8% Agreement</p>
+                </div>
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/conversational_flow.png" alt="Conversational Flow: 88.7% coherence">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Conversational Flow<br>88.7% Coherence</p>
+                </div>
+                <div class="column is-one-third has-text-centered">
+                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
+                    <img src="static/images/results/rhetorical_pattern_matching.png" alt="Rhetorical Pattern Matching: 83.2% similarity">
+                  </figure>
+                  <p class="is-size-7 has-text-grey">Rhetorical Pattern Matching<br>83.2% Similarity</p>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -388,36 +446,58 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Available Models</h2>
+          <h2 class="title is-3 has-text-centered mb-5">Available Models</h2>
           <div class="content">
-            <p>
-              We release the following fine-tuned models to support further research in political discourse simulation:
+            <p class="has-text-centered mb-5">
+              Explore our fine-tuned models. Interact directly via Hugging Face adapters or run locally with Ollama.
             </p>
 
-            <div class="columns is-centered">
-              <!-- Trump Model -->
-              <div class="column">
-                <div class="box">
-                  <h4 class="title is-5">Trump Model</h4>
-                  <p>
-                    LoRA adapter fine-tuned on 37,500+ statements, speeches, and interviews from Donald Trump.
+            <div class="columns is-centered is-variable is-5">
+              <!-- Trump Model Card -->
+              <div class="column is-half">
+                <div class="box" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background-color: #ffffff; padding: 2rem;">
+                  <h4 class="title is-4 has-text-centered">Trump Model</h4>
+                  <p class="has-text-grey mb-4 has-text-centered is-size-6">
+                    Fine-tuned to capture the distinctive communication style and rhetoric of Donald Trump.
                   </p>
-                  <a href="https://huggingface.co/nnat03/trump-mistral-adapter" class="button is-link is-small" target="_blank">
-                    Available on Hugging Face
-                  </a>
+                  <div class="buttons is-centered">
+                    <a href="https://huggingface.co/nnat03/trump-mistral-adapter" class="button is-light is-rounded" target="_blank" style="background-color: #f5f5f5;">
+                      <span class="icon">
+                        <img src="static/icons/huggingface-light.png" alt="Hugging Face" style="height: 18px;">
+                      </span>
+                      <span>Hugging Face</span>
+                    </a>
+                    <a href="https://ollama.com/nnat03/trump-mistral" class="button is-light is-rounded" target="_blank" style="background-color: #f5f5f5;">
+                      <span class="icon">
+                        <img src="static/icons/ollama-light.png" alt="Ollama" style="height: 18px;">
+                      </span>
+                      <span>Ollama</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-              
-              <!-- Biden Model -->
-              <div class="column">
-                <div class="box">
-                  <h4 class="title is-5">Biden Model</h4>
-                  <p>
-                    LoRA adapter fine-tuned on 32,700+ statements, speeches, and interviews from Joe Biden.
+
+              <!-- Biden Model Card -->
+              <div class="column is-half">
+                <div class="box" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background-color: #ffffff; padding: 2rem;">
+                  <h4 class="title is-4 has-text-centered">Biden Model</h4>
+                  <p class="has-text-grey mb-4 has-text-centered is-size-6">
+                    Fine-tuned to capture the measured cadence and characteristic expressions of Joe Biden.
                   </p>
-                  <a href="https://huggingface.co/nnat03/biden-mistral-adapter" class="button is-link is-small" target="_blank">
-                    Available on Hugging Face
-                  </a>
+                  <div class="buttons is-centered">
+                    <a href="https://huggingface.co/nnat03/biden-mistral-adapter" class="button is-light is-rounded" target="_blank" style="background-color: #f5f5f5;">
+                      <span class="icon">
+                        <img src="static/icons/huggingface-light.png" alt="Hugging Face" style="height: 18px;">
+                      </span>
+                      <span>Hugging Face</span>
+                    </a>
+                    <a href="https://ollama.com/nnat03/biden-mistral" class="button is-light is-rounded" target="_blank" style="background-color: #f5f5f5;">
+                      <span class="icon">
+                        <img src="static/icons/ollama-light.png" alt="Ollama" style="height: 18px;">
+                      </span>
+                      <span>Ollama</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
