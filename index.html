@@ -287,15 +287,22 @@
             </p>
 
             <h3 class="title is-4">Model Architecture</h3>
-            <p>
-              We use Mistral-7B-Instruct-v0.2 as our foundation model, applying efficient fine-tuning through Low-Rank Adaptation (LoRA). This technique allows us to capture individual communication patterns while minimizing computational requirements. Our adapter configuration uses:
-            </p>
-            <ul>
-              <li>Rank: 8</li>
-              <li>Alpha: 16</li>
-              <li>Dropout: 0.05</li>
-              <li>Target modules: q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj</li>
-            </ul>
+            <!-- Restructure columns for side-by-side layout - Adjust vertical alignment -->
+            <div class="columns is-centered is-vcentered mt-4 mb-4"> <!-- Keep is-vcentered for overall column alignment -->
+              <div class="column is-half is-flex is-flex-direction-column is-justify-content-center"> <!-- Text column - Center content vertically -->
+                <p>
+                  The foundation of our system is the Mistral-7B-Instruct-v0.2 large language model. To adapt this model for simulating specific political figures, we employ parameter-efficient fine-tuning using Low-Rank Adaptation (LoRA). This approach enables the capture of nuanced individual communication styles and rhetorical patterns while substantially reducing the computational overhead associated with full fine-tuning. Specifically, our LoRA implementation utilizes adapters configured with a rank (r) of 8, a scaling factor (alpha) of 16, and a dropout rate of 0.05. These adapters are integrated into the Transformer architecture by targeting the query (`q_proj`), key (`k_proj`), value (`v_proj`), and output (`o_proj`) projection layers within the self-attention mechanism, as well as the gate (`gate_proj`), up (`up_proj`), and down (`down_proj`) projection layers within the feed-forward network components.
+                </p>
+              </div>
+              <div class="column is-half is-flex is-align-items-center"> <!-- Image column - Center content vertically -->
+                <figure class="image mx-auto" style="max-width: 500px;">
+                  <img src="static/images/model-arch.png" alt="LoRA Adapter Integration with Transformer Block">
+                  <figcaption class="is-size-7 has-text-centered mt-2">
+                    Illustration of LoRA adapter integration within a Transformer block, targeting specific projection layers.
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
             
             <h3 class="title is-4">Training Data Collection</h3>
             <p>
