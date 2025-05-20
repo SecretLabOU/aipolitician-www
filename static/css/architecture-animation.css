@@ -1,0 +1,277 @@
+/* Architecture Animation Styles */
+.architecture-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.architecture-section {
+  position: absolute;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  width: 170px;
+  height: 325px;
+  border: 1px solid #eaeaea;
+  box-sizing: border-box;
+}
+
+.architecture-section:hover {
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+}
+
+.section-a {
+  top: 30px;
+  left: 50px;
+  background: #f7faff;
+  z-index: 1;
+}
+
+.section-b {
+  top: 30px;
+  left: calc(50% - 85px);
+  background: #f9f9f9;
+  z-index: 1;
+}
+
+.section-c {
+  top: 30px;
+  right: 50px;
+  background: #f7faf7;
+  z-index: 1;
+}
+
+.section-title {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 18px;
+  color: #333;
+  font-size: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.component {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 12px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.component:hover {
+  transform: scale(1.03);
+}
+
+.component i {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.icon-label {
+  font-size: 10px;
+  font-weight: 500;
+  color: #444;
+  white-space: nowrap;
+}
+
+.section-a .component {
+  background-color: #f7faff;
+}
+
+.section-a .component i {
+  color: #3273dc;
+}
+
+.section-b .component {
+  background-color: #f5f5f5;
+}
+
+.section-b .component i {
+  color: #506377;
+}
+
+.section-c .component {
+  background-color: #f7faf7;
+}
+
+.section-c .component i {
+  color: #247158;
+}
+
+.data-flow {
+  position: absolute;
+  background-color: transparent;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.horizontal-flow {
+  height: 2px;
+  background: linear-gradient(to right, rgba(50, 115, 220, 0.3) 0%, rgba(50, 115, 220, 0.7) 100%);
+  animation: pulse 2s infinite, flowEffect 4s infinite;
+}
+
+/* Adjust the flow lines to be properly aligned with the increased spacing */
+.horizontal-flow:nth-child(1) {
+  top: 180px;
+  left: 220px;
+  width: 110px;
+}
+
+.horizontal-flow:nth-child(2) {
+  top: 180px;
+  left: 430px;
+  width: 110px;
+}
+
+.vertical-flow {
+  width: 2px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes flowEffect {
+  0% {
+    background-position: -100px 0;
+  }
+  100% {
+    background-position: 100px 0;
+  }
+}
+
+.data-point {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #3273dc;
+  box-shadow: 0 0 5px rgba(50, 115, 220, 0.4);
+  z-index: 3;
+}
+
+.flow-a-to-b {
+  animation: flowAtoB 3s infinite;
+}
+
+.flow-b-to-c {
+  animation: flowBtoC 3s infinite;
+}
+
+/* Adjust keyframes to match the new flow lines positions */
+@keyframes flowAtoB {
+  0% {
+    transform: translateX(170px) translateY(180px);
+    opacity: 0;
+    width: 4px;
+    height: 4px;
+  }
+  20% {
+    opacity: 0.8;
+    width: 6px;
+    height: 6px;
+  }
+  80% {
+    opacity: 0.8;
+    width: 6px;
+    height: 6px;
+  }
+  100% {
+    transform: translateX(270px) translateY(180px);
+    opacity: 0;
+    width: 4px;
+    height: 4px;
+  }
+}
+
+@keyframes flowBtoC {
+  0% {
+    transform: translateX(430px) translateY(180px);
+    opacity: 0;
+    width: 4px;
+    height: 4px;
+  }
+  20% {
+    opacity: 0.8;
+    width: 6px;
+    height: 6px;
+  }
+  80% {
+    opacity: 0.8;
+    width: 6px;
+    height: 6px;
+  }
+  100% {
+    transform: translateX(530px) translateY(180px);
+    opacity: 0;
+    width: 4px;
+    height: 4px;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Special handling for section-b to maintain its position during animations */
+.section-b.slide-in {
+  transform: none;
+} 
