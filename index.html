@@ -32,6 +32,7 @@
   <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/architecture-animation.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
@@ -39,6 +40,8 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+  <script src="static/js/chat.js"></script>
+  <script src="static/js/architecture-animation.js"></script>
 </head>
 <body>
 
@@ -51,7 +54,7 @@
             <div class="is-size-5 publication-authors">
               <!-- Project authors -->
               <span class="author-block">
-                <a href="https://natalie-a-1.github.io" target="_blank">Natalie Hill</a>,</span>
+                <a href="https://nataliehill.vercel.app" target="_blank">Natalie Hill</a>,</span>
                 <span class="author-block">
                   <a href="https://www.linkedin.com/in/pdj5/" target="_blank">Preston Jones</a></span>
                   </div>
@@ -113,106 +116,48 @@
             <div class="px-4 py-2" style="border-bottom: 1px solid #f0f0f0; background-color: #ffffff;">
               <div class="is-flex is-justify-content-center" style="gap: 24px; margin-bottom: 0;">
                 <!-- Trump (selected) -->
-                <div class="has-text-centered" style="position: relative;">
+                <div class="has-text-centered politician-selector" style="position: relative;" data-politician="trump">
                   <figure class="image is-48x48 mx-auto mb-1" style="cursor: pointer; border: 3px solid #3273dc; border-radius: 50%; overflow: hidden;">
                     <img src="static/images/trump.jpeg" alt="Donald Trump" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
                   </figure>
                   <span class="has-text-weight-medium is-size-7 d-block">Trump</span>
-                  <span class="icon has-text-success" style="position: absolute; bottom: 15px; right: 0;">
+                  <span class="icon has-text-success check-icon" style="position: absolute; bottom: 15px; right: 0; display: block;">
                     <i class="fas fa-check-circle"></i>
                   </span>
                 </div>
                 
                 <!-- Biden -->
-                <div class="has-text-centered">
+                <div class="has-text-centered politician-selector" style="position: relative;" data-politician="biden">
                   <figure class="image is-48x48 mx-auto mb-1" style="cursor: pointer; border: 3px solid transparent; border-radius: 50%; overflow: hidden;">
                     <img src="static/images/biden.jpeg" alt="Joe Biden" onerror="this.src='https://bulma.io/images/placeholders/48x48.png'">
                   </figure>
                   <span class="has-text-weight-medium is-size-7 d-block">Biden</span>
+                  <span class="icon has-text-success check-icon" style="position: absolute; bottom: 15px; right: 0; display: none;">
+                    <i class="fas fa-check-circle"></i>
+                  </span>
                 </div>
               </div>
             </div>
             
             <!-- Chat Area -->
-            <div style="height: 440px; overflow-y: auto; background-color: #ffffff; padding-bottom: 10px;">
-              <!-- System Message -->
-              <div class="px-4 py-3" style="display: flex; justify-content: center;">
-                <div style="background-color: #f7f7f8; padding: 8px 16px; border-radius: 8px; max-width: 85%;">
-                  <p class="is-size-7 has-text-grey">You are now chatting with Donald Trump. Ask any policy question or discuss current events.</p>
-                </div>
-              </div>
-              
-              <!-- User Message -->
-              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
-                <div style="max-width: 85%;">
-                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
-                    <p>What's your position on climate change?</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- AI Response - Trump -->
-              <div class="px-5 py-3" style="display: flex;">
-                <img src="static/images/trump.jpeg" alt="Trump" style="height: 32px; width: 32px; border-radius: 4px; margin-right: 12px; margin-top: 3px;" onerror="this.src='https://bulma.io/images/placeholders/32x32.png'">
-                <div style="max-width: 85%;">
-                  <div style="padding: 12px 16px; border-radius: 8px; background-color: #f7f7f8;">
-                    <p>Look, climate change. People are talking about it, but let me tell you, we have to be smart about this. Very smart. We can't destroy American jobs with terrible deals like the Paris Accord. The biggest polluters? China, India - they get to do whatever they want while we suffer.</p>
-                    <p class="mt-2">I believe in crystal clean water, crystal clean air. America has some of the cleanest air in the world right now, and it's getting better. But we need to approach this in a way that doesn't kill our economy. Our beautiful coal miners, our energy workers - we can't leave them behind.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- User Message -->
-              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
-                <div style="max-width: 85%;">
-                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
-                    <p>I'd like to hear Biden's perspective on the same issue.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- System Message -->
-              <div class="px-4 py-3" style="display: flex; justify-content: center;">
-                <div style="background-color: #f7f7f8; padding: 8px 16px; border-radius: 8px; max-width: 85%;">
-                  <p class="is-size-7 has-text-grey">Switching to Joe Biden</p>
-                </div>
-              </div>
-              
-              <!-- AI Response - Biden -->
-              <div class="px-5 py-3" style="display: flex;">
-                <img src="static/images/biden.jpeg" alt="Biden" style="height: 32px; width: 32px; border-radius: 4px; margin-right: 12px; margin-top: 3px;" onerror="this.src='https://bulma.io/images/placeholders/32x32.png'">
-                <div style="max-width: 85%;">
-                  <div style="padding: 12px 16px; border-radius: 8px; background-color: #f7f7f8;">
-                    <p>Climate change is an existential threat to our future. It's not just an environmental issue, but an economic one, a health one, a national security issue, and a justice issue. And we're seeing the effects right now - more intense storms, longer wildfire seasons, record floods.</p>
-                    <p class="mt-2">My administration committed to a 50-52% reduction in greenhouse gas pollution by 2030. We rejoined the Paris Agreement on day one. This isn't just about saving the planet - it's about creating good-paying, union jobs in clean energy. We're making historic investments in infrastructure to build a more resilient future and lead the clean energy economy.</p>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- User Message -->
-              <div class="px-5 py-3" style="display: flex; justify-content: flex-end;">
-                <div style="max-width: 85%;">
-                  <div style="background-color: #f0f7fb; padding: 12px 16px; border-radius: 8px; margin-left: auto;">
-                    <p>Let's start a debate between Trump and Biden on energy policy.</p>
-                  </div>
-                </div>
-              </div>
+            <div id="chatbox" style="height: 440px; overflow-y: auto; background-color: #ffffff; padding-bottom: 10px;">
+              <!-- Chat messages will be inserted here dynamically by chat.js -->
             </div>
             
             <!-- Input Area -->
             <div class="px-4 py-3" style="border-top: 1px solid #f0f0f0; background-color: #ffffff;">
-              <div class="field has-addons">
+              <form id="message-form" class="field has-addons">
                 <div class="control is-expanded">
-                  <textarea class="textarea" placeholder="Type your message..." rows="1" style="border-radius: 8px; border-color: #e0e0e0; box-shadow: none; resize: none;"></textarea>
+                  <textarea id="message-input" class="textarea" placeholder="Type your message..." rows="1" style="border-radius: 8px; border-color: #e0e0e0; box-shadow: none; resize: none;"></textarea>
                 </div>
                 <div class="control">
-                  <button class="button" style="border-radius: 8px; background-color: #f5f5f5; margin-left: 8px; height: 100%;">
+                  <button id="send-button" type="submit" class="button" style="border-radius: 8px; background-color: #f5f5f5; margin-left: 8px; height: 100%;">
                     <span class="icon">
                       <i class="fas fa-paper-plane"></i>
                     </span>
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
           <!-- End AI Politician Chat Interface -->
@@ -253,21 +198,87 @@
           <h2 class="title is-3 has-text-centered">System Architecture</h2>
           <div class="content has-text-centered">
             <figure class="image">
-              <img src="static/images/ai_politician_architecture.png" alt="AI Politician System Architecture Diagram">
+              <div class="architecture-container">
+                <!-- Section A: Data Collection & Processing -->
+                <div class="architecture-section section-a">
+                  <div class="section-title">Data Processing</div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-database"></i>
+                    <span class="icon-label">Text Corpus</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-filter"></i>
+                    <span class="icon-label">Cleaning</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-th-list"></i>
+                    <span class="icon-label">Tokenization</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-code-branch"></i>
+                    <span class="icon-label">Preprocessing</span>
+                  </div>
+                </div>
+                
+                <!-- Section B: Model Fine-tuning & Knowledge Base -->
+                <div class="architecture-section section-b">
+                  <div class="section-title">Model & Knowledge</div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-microchip"></i>
+                    <span class="icon-label">Mistral-7B</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-sliders-h"></i>
+                    <span class="icon-label">LoRA Fine-tuning</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-vector-square"></i>
+                    <span class="icon-label">Vector Embedding</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-cube"></i>
+                    <span class="icon-label">ChromaDB</span>
+                  </div>
+                </div>
+                
+                <!-- Section C: Interactive Systems -->
+                <div class="architecture-section section-c">
+                  <div class="section-title">Response Generation</div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-search"></i>
+                    <span class="icon-label">Query Analysis</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-sitemap"></i>
+                    <span class="icon-label">Context Retrieval</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-cogs"></i>
+                    <span class="icon-label">Inference</span>
+                  </div>
+                  <div class="component" style="opacity: 0;">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="icon-label">Response Format</span>
+                  </div>
+                </div>
+                
+                <!-- Data Flow Lines with animated paths -->
+                <div class="data-flow horizontal-flow" style="opacity: 0;"></div>
+                <div class="data-flow horizontal-flow" style="opacity: 0;"></div>
+              </div>
               <figcaption class="mt-2">
-                <strong>AI Politician System Architecture:</strong> (a) Input data collection and processing, 
-                (b) Model fine-tuning and knowledge base creation, 
-                (c) Interactive system components and response generation
+                <strong>AI Politician System Architecture:</strong> (a) Data collection and preprocessing pipeline, 
+                (b) Model fine-tuning and knowledge base integration, 
+                (c) Query processing and response generation workflow
               </figcaption>
             </figure>
           </div>
           <div class="content has-text-justified mt-4">
             <p>
               The AI Politician system integrates multiple components to deliver personalized political discourse. 
-              The workflow begins with (a) collecting and processing political speech data, 
+              The workflow begins with (a) collecting and preprocessing political speech data, 
               (b) applying LoRA fine-tuning to the Mistral-7B models and building the knowledge vector database, 
-              and (c) orchestrating the three subsystems—Chat, Debate, and RAG—to generate contextually appropriate 
-              and stylistically accurate responses.
+              and (c) orchestrating response generation through query analysis, context retrieval, and inference.
             </p>
           </div>
         </div>
@@ -335,114 +346,8 @@
   </section>
   <!-- End Methodology -->
 
-  <!-- Experiments -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3 has-text-centered mb-5">Experimental Results</h2>
-
-          <!-- Card 1: Fine-tuning Performance -->
-          <div class="box" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background-color: #ffffff; padding: 2rem; margin-bottom: 2rem;">
-            <h3 class="title is-4 has-text-centered mb-4">Fine-tuning Performance</h3>
-            <div class="content">
-              <p class="has-text-centered is-size-6 has-text-grey mb-4">
-                Models showed significant improvements in personalization metrics after fine-tuning, with minimal loss of general capabilities:
-              </p>
-              <!-- Replace UL with Columns for Images -->
-              <div class="columns is-mobile is-multiline is-centered is-variable is-2">
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/style_matching_score.png" alt="Style Matching Score: 78.6% improvement">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Style Matching Score<br>78.6% Improvement</p>
-                </div>
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/policy_consistency.png" alt="Policy Consistency: 82.3% alignment">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Policy Consistency<br>82.3% Alignment</p>
-                </div>
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/response_coherence.png" alt="Response Coherence: 91.2% preference">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Response Coherence<br>91.2% Preference</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2: RAG Integration Effectiveness -->
-          <div class="box" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background-color: #ffffff; padding: 2rem; margin-bottom: 2rem;">
-            <h3 class="title is-4 has-text-centered mb-4">RAG Integration Effectiveness</h3>
-            <div class="content">
-              <p class="has-text-centered is-size-6 has-text-grey mb-4">
-                Retrieval-augmented generation significantly enhanced factual accuracy:
-              </p>
-              <!-- Replace UL with Columns for Images -->
-              <div class="columns is-mobile is-multiline is-centered is-variable is-2">
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/factual_precision.png" alt="Factual Precision: 87.4% with RAG vs 63.5% without">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Factual Precision<br>87.4% (RAG) vs 63.5%</p>
-                </div>
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/source_attribution.png" alt="Source Attribution: 92.7% proper attribution">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Source Attribution<br>92.7% Attribution</p>
-                </div>
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/temporal_awareness.png" alt="Temporal Awareness: 89.1% correct context">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Temporal Awareness<br>89.1% Correct Context</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3: Debate Simulation Quality -->
-          <div class="box" style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); background-color: #ffffff; padding: 2rem;">
-            <h3 class="title is-4 has-text-centered mb-4">Debate Simulation Quality</h3>
-            <div class="content">
-              <p class="has-text-centered is-size-6 has-text-grey mb-4">
-                Moderated debates between AI Politicians demonstrated:
-              </p>
-              <!-- Replace UL with Columns for Images -->
-              <div class="columns is-mobile is-multiline is-centered is-variable is-2">
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/character_consistency.png" alt="Character Consistency: 94.8% agreement">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Character Consistency<br>94.8% Agreement</p>
-                </div>
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/conversational_flow.png" alt="Conversational Flow: 88.7% coherence">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Conversational Flow<br>88.7% Coherence</p>
-                </div>
-                <div class="column is-one-third has-text-centered">
-                  <figure class="image is-inline-block" style="max-width: 150px; margin-bottom: 0.5rem;">
-                    <img src="static/images/results/rhetorical_pattern_matching.png" alt="Rhetorical Pattern Matching: 83.2% similarity">
-                  </figure>
-                  <p class="is-size-7 has-text-grey">Rhetorical Pattern Matching<br>83.2% Similarity</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End Experiments -->
-
   <!-- Models section -->
-  <section class="section hero is-light">
+  <section class="section hero">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-four-fifths">
@@ -509,7 +414,7 @@
   <!-- End Models section -->
 
   <!-- Discussion and Future Work -->
-  <section class="section">
+  <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-four-fifths">
@@ -545,14 +450,25 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@misc{hill2024aipolitician,
+      <!-- Container with relative positioning for the citation and copy button -->
+      <div style="position: relative;">
+        <!-- Copy button in the top-right corner -->
+        <button id="copy-bibtex-btn" class="button is-small" 
+                style="position: absolute; top: 0; right: 0; z-index: 10; background-color: #f5f5f5; border: none; 
+                       border-radius: 4px; margin: 5px; padding: 5px 10px; cursor: pointer;">
+          <span class="icon is-small">
+            <i class="fas fa-copy"></i>
+          </span>
+          <span>Copy</span>
+        </button>
+        <pre><code id="bibtex-content">@misc{hill2024aipolitician,
   author       = {Hill, Natalie and Jones, Preston},
   title        = {{AI Politician: Fine-tuned Models for Political Discourse}},
   year         = {2024},
   howpublished = {\url{https://aipolitician.org}},
   note         = {Project page available online. Code: https://github.com/SecretLabOU/aipolitician, Models: https://huggingface.co/collections/nnat03/ai-politician-680852b5f01da6e491803cdf}
-}
-</code></pre>
+}</code></pre>
+      </div>
     </div>
   </section>
   <!-- End BibTeX -->
@@ -570,6 +486,50 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Add this script at the end of the body or in your JS file
+    document.addEventListener('DOMContentLoaded', function() {
+      const copyBtn = document.getElementById('copy-bibtex-btn');
+      const bibtexContent = document.getElementById('bibtex-content');
+      
+      if (copyBtn && bibtexContent) {
+        copyBtn.addEventListener('click', function() {
+          // Create a range and select the text
+          const range = document.createRange();
+          range.selectNode(bibtexContent);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+          
+          try {
+            // Execute the copy command
+            const successful = document.execCommand('copy');
+            
+            // Visual feedback
+            if (successful) {
+              // Change button text temporarily
+              const originalContent = copyBtn.innerHTML;
+              copyBtn.innerHTML = '<span class="icon is-small"><i class="fas fa-check"></i></span><span>Copied!</span>';
+              copyBtn.style.backgroundColor = '#e6f7e9';
+              copyBtn.style.color = '#287e3c';
+              
+              // Revert back after 2 seconds
+              setTimeout(function() {
+                copyBtn.innerHTML = originalContent;
+                copyBtn.style.backgroundColor = '#f5f5f5';
+                copyBtn.style.color = '';
+              }, 2000);
+            }
+          } catch (err) {
+            console.error('Unable to copy', err);
+          }
+          
+          // Clear the selection
+          window.getSelection().removeAllRanges();
+        });
+      }
+    });
+  </script>
 
 </body>
 </html> 
