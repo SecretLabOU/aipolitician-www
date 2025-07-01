@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Contact and Collaborate with MagnetDB Research Team">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Collaborate - MagnetDB</title>
+  <link rel="icon" type="image/x-icon" href="MagnetDB_logo.png">
+  
+  <!-- Google Fonts for vintage typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;500;600&family=League+Gothic&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    :root {
+      --parchment-beige: #F3E7D7;
+      --brick-red: #8C2B2F;
+      --rust-accent: #B04C39;
+      --charcoal-gray: #3B3A36;
+      --dusty-teal: #4F6F6C;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      background-color: var(--parchment-beige);
+      color: var(--charcoal-gray);
+      line-height: 1.6;
+    }
+
+    /* Fixed Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--brick-red);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--rust-accent);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-menu a:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-menu a.active {
+      color: white;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--parchment-beige) 0%, #E8D5C4 100%);
+      padding: 120px 0 80px;
+      text-align: center;
+      margin-top: 70px;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--brick-red);
+      margin-bottom: 20px;
+    }
+
+    .page-subtitle {
+      font-size: 1.2rem;
+      color: var(--charcoal-gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-alt {
+      background-color: #E8D5C4;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--brick-red);
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background-color: var(--rust-accent);
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    /* Flip Card Styles */
+    .flip-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      width: 100%;
+      height: 300px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(140, 43, 47, 0.1);
+    }
+
+    .flip-card-front {
+      background: white;
+      border: 2px solid var(--brick-red);
+    }
+
+    .flip-card-back {
+      background: var(--brick-red);
+      color: white;
+      transform: rotateY(180deg);
+      border: 2px solid var(--brick-red);
+    }
+
+    .flip-card-icon {
+      font-size: 3rem;
+      color: var(--brick-red);
+      margin-bottom: 20px;
+    }
+
+    .flip-card-back .flip-card-icon {
+      color: white;
+    }
+
+    .flip-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--brick-red);
+      margin-bottom: 15px;
+    }
+
+    .flip-card-back .flip-card-title {
+      color: white;
+    }
+
+    .flip-card-description {
+      color: var(--charcoal-gray);
+      line-height: 1.6;
+    }
+
+    .flip-card-back .flip-card-description {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .flip-card-hint {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      color: var(--dusty-teal);
+      opacity: 0.7;
+    }
+
+    .flip-card-back .flip-card-hint {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-member {
+      background: white;
+      border: 2px solid var(--brick-red);
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(140, 43, 47, 0.15);
+    }
+
+    .member-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--brick-red);
+      margin-bottom: 10px;
+    }
+
+    .member-title {
+      color: var(--dusty-teal);
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .member-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .member-links a {
+      color: var(--brick-red);
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .member-links a:hover {
+      color: var(--rust-accent);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--charcoal-gray);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-left {
+      text-align: left;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .footer-center {
+      text-align: center;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .footer-right {
+      text-align: right;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .footer-logo {
+      height: 60px;
+      width: auto;
+      margin: 10px;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-logo:hover {
+      opacity: 1;
+    }
+
+    .footer-logo.cs-logo {
+      filter: brightness(0) invert(1);
+    }
+
+    .imdb-attribution {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    .imdb-attribution a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+    }
+
+    .imdb-attribution a:hover {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 2.5rem;
+      }
+      
+      .flip-cards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .footer-left,
+      .footer-center,
+      .footer-right {
+        text-align: center;
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="MagnetDB_logo.png" alt="MagnetDB Logo">
+        MagnetDB
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dataset-access.html">Dataset Access</a></li>
+        <li><a href="contact-collaborate.html" class="active">Collaborate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-title">Collaborate with MagnetDB</h1>
+      <p class="page-subtitle">
+        Explore potential research areas and collaboration opportunities. Hover over the cards to learn more about each topic.
+      </p>
+    </div>
+  </section>
+
+  <!-- Collaboration Areas with Flip Cards -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Research Collaboration Areas</h2>
+      <div class="flip-cards-grid">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">
+                <i class="fas fa-ship"></i>
+              </div>
+              <h3 class="flip-card-title">Digital Piracy Dynamics</h3>
+              <p class="flip-card-description">Supply-side analysis and ecosystem evolution</p>
+              <p class="flip-card-hint">Hover to learn more</p>
+            </div>
+            <div class="flip-card-back">
+              <h3 class="flip-card-title">Digital Piracy Dynamics</h3>
+              <p class="flip-card-description">
+                Study supply-side analysis, release patterns, and ecosystem evolution. Analyze how content flows through digital networks, 
+                identify key players and patterns, and understand the dynamics of content distribution in peer-to-peer networks.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3 class="flip-card-title">Cultural Analytics</h3>
+              <p class="flip-card-description">Content diffusion and popularity trends</p>
+              <p class="flip-card-hint">Hover to learn more</p>
+            </div>
+            <div class="flip-card-back">
+              <h3 class="flip-card-title">Cultural Analytics</h3>
+              <p class="flip-card-description">
+                Investigate content diffusion patterns, popularity trends, and cultural impact studies. 
+                Understand how media content spreads across networks, what drives popularity, and how cultural 
+                phenomena emerge and evolve in digital spaces.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">
+                <i class="fas fa-balance-scale"></i>
+              </div>
+              <h3 class="flip-card-title">Policy Research</h3>
+              <p class="flip-card-description">Anti-piracy measures and regulatory interventions</p>
+              <p class="flip-card-hint">Hover to learn more</p>
+            </div>
+            <div class="flip-card-back">
+              <h3 class="flip-card-title">Policy Research</h3>
+              <p class="flip-card-description">
+                Evaluate the effectiveness of anti-piracy measures and regulatory interventions. 
+                Analyze policy impacts, measure intervention success rates, and develop evidence-based 
+                recommendations for digital content protection strategies.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <h3 class="flip-card-title">Machine Learning</h3>
+              <p class="flip-card-description">Content classification and predictive modeling</p>
+              <p class="flip-card-hint">Hover to learn more</p>
+            </div>
+            <div class="flip-card-back">
+              <h3 class="flip-card-title">Machine Learning</h3>
+              <p class="flip-card-description">
+                Develop content classification systems, recommendation algorithms, and predictive models. 
+                Apply ML techniques to understand content patterns, predict popularity, and build intelligent 
+                systems for content analysis and discovery.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">
+                <i class="fas fa-network-wired"></i>
+              </div>
+              <h3 class="flip-card-title">Network Analysis</h3>
+              <p class="flip-card-description">P2P network structures and information flow</p>
+              <p class="flip-card-hint">Hover to learn more</p>
+            </div>
+            <div class="flip-card-back">
+              <h3 class="flip-card-title">Network Analysis</h3>
+              <p class="flip-card-description">
+                Analyze P2P network structures and information flow patterns. Study network topology, 
+                identify key nodes and communities, understand how information propagates through 
+                distributed networks, and model network dynamics.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="flip-card-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3 class="flip-card-title">Collaboration Formats</h3>
+              <p class="flip-card-description">Joint publications and research projects</p>
+              <p class="flip-card-hint">Hover to learn more</p>
+            </div>
+            <div class="flip-card-back">
+              <h3 class="flip-card-title">Collaboration Formats</h3>
+              <p class="flip-card-description">
+                We welcome joint publications, collaborative data analysis, tool development, 
+                workshop organization, and student project supervision. Contact us to discuss 
+                specific collaboration opportunities and research proposals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Team -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Research Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <h3 class="member-name">Scott Seidenberger</h3>
+          <p class="member-title">PhD Candidate</p>
+          <div class="member-links">
+            <a href="https://seidenberger.cloud" target="_blank" title="Personal Website">
+              <i class="fas fa-globe"></i>
+            </a>
+            <a href="mailto:scott.seidenberger@ou.edu" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <h3 class="member-name">Noah Pursell</h3>
+          <p class="member-title">Masters Student</p>
+          <div class="member-links">
+            <a href="mailto:noah.pursell@ou.edu" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <h3 class="member-name">Dr. Anindya Maiti</h3>
+          <p class="member-title">Assistant Professor</p>
+          <div class="member-links">
+            <a href="https://maiti.info/anindya/" target="_blank" title="Personal Website">
+              <i class="fas fa-globe"></i>
+            </a>
+            <a href="mailto:am@ou.edu" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Getting Started Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Getting Started</h2>
+      <div class="content">
+        <p>
+          We hope you get in touch with us! 
+        </p>
+        <ol>
+          <li><strong>Review the dataset</strong>: Check out our <a href="dataset-access.html">data access options</a> and the potential collaboration areas</li>
+          <li><strong>Send a proposal</strong>: Email us a brief outline of your research interests and collaboration ideas (informal of course!)</li>
+          <li><strong>Schedule a meeting</strong>: We'll discuss potential synergies and next steps</li>
+          <li><strong>Student projects</strong>: Include your advisor's contact information for any thesis work</li>
+        </ol>
+        
+        <p style="margin-top: 30px; text-align: center;">
+          <strong>Contact us at:</strong> <a href="mailto:seidenberger@ou.edu">{seidenberger, am}@ou.edu</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <img src="static/images/cs_logo.png" alt="University of Oklahoma Computer Science" class="footer-logo cs-logo">
+        </div>
+        
+        <div class="footer-center">
+          <img src="static/images/ccby.png" alt="Creative Commons Attribution 4.0 International" class="footer-logo">
+        </div>
+        
+        <div class="footer-right">
+          <img src="static/images/imdb_logo.png" alt="IMDb" class="footer-logo">
+          <div class="imdb-attribution">
+            Information courtesy of <a href="https://www.imdb.com" target="_blank">IMDb</a>.<br>
+            Used with permission.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> 
