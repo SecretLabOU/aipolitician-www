@@ -1,143 +1,267 @@
-# AI Politician: Fine-tuned Models for Political Discourse
+# MagnetDB: A Longitudinal Torrent-Discovery Dataset with IMDb-Matched Movies & TV Shows
 
-Natalie Hill, Preston Jones  
-University of Oklahoma, Department of Computer Science
+Research Team  
+Digital Media Research Group, Academic Institution
 
 ## Abstract
 
-Political discourse simulation presents unique challenges for language models due to the need for accurate representation of individual communication styles, consistent policy positions, and factual grounding. In this research, we introduce AI Politician—a system of fine-tuned Mistral-7B language models designed to faithfully recreate political discourse. We employ LoRA adapters and Retrieval-Augmented Generation (RAG) to enable efficient adaptation while maintaining factual accuracy. Our methodology combines parameter-efficient fine-tuning on political speech corpora with context-aware knowledge retrieval to produce coherent, personalized responses that maintain the distinct communication characteristics of specific political figures.
+MagnetDB is a five-year (Dec 2018 – Sep 2024) longitudinal dataset that continuously captures torrents discovered through the BitTorrent Distributed Hash Table (DHT). It indexes **28.6 million torrents, 950 million files, and 82.9 PB of content**, and enriches 1.56 million video files (≈ 751k movies, 811k TV episodes) with IMDb identifiers.
+
+By exposing granular supply-side metadata—including release-group "encoders," distribution "sites," file-level tags, and cross-referenced IMDb attributes—MagnetDB enables new empirical work on piracy dynamics, cultural diffusion, and P2P ecosystem evolution. The dataset is released under a CC BY 4.0 licence and follows FAIR principles; magnet links are provided to accredited researchers on request.
 
 ## Overview
 
-The AI Politician project develops fine-tuned language models that accurately simulate political figures' communication styles, rhetorical patterns, and policy positions through parameter-efficient adaptation. Our system enables natural dialogue interactions, structured debates, and fact-grounded responses using retrieval-augmented generation.
+MagnetDB is a comprehensive longitudinal dataset that captures the supply-side dynamics of the BitTorrent ecosystem. Unlike previous datasets that focus on download behavior, MagnetDB captures who uploads what content, enabling research on release-group behavior, gift-economy incentives, and subcultural norms in digital piracy.
+
+## Key Features
+
+| Feature                                                         | Why it matters                                                                                                                                        |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Longitudinal coverage (2018-2024, 300 weeks, 93.7% uptime)** | Supports time-series analyses of supply trends and policy interventions.                                                                              |
+| **Scale: 28.6M torrents / 950M files / 82.9PB**              | Orders of magnitude larger than prior open torrent datasets; suitable for large-scale ML and statistical studies.                                     |
+| **Supply-side focus**                                           | Captures who uploads what, not merely who downloads, enabling research on release-group behaviour, gift-economy incentives, and subcultural norms.  |
+| **Rich, structured metadata**                                   | Extracts >40 attributes (quality, language, codec, resolution, release group, etc.) from Scene-style file names.                                      |
+| **IMDb matching (1.56M files above 2σ BM25 threshold)**       | Adds title, year, genre, ratings, cast, runtime—linking BitTorrent supply to mainstream media databases.                                              |
+| **FAIR distribution (OSF DOI + AcademicTorrents)**              | Persistent identifiers, open formats (SQLite + CSV), annual updates, and documented provenance.                                                       |
 
 ## System Architecture
 
-![AI Politician System Architecture](static/images/ai_politician_architecture.png)
+MagnetDB is built on a robust data collection and processing pipeline:
 
-The AI Politician system integrates three primary components coordinated through a unified workflow as shown in the diagram above:
-
-1. **Data Collection & Processing**: Raw political speech data is collected, cleaned, and processed.
-2. **Model Fine-tuning & Knowledge Base Creation**: Mistral-7B models are fine-tuned using LoRA adapters, and a vector database is populated with contextual knowledge.
-3. **Interactive System Components**: Three integrated subsystems work together to generate responses.
-
-| **Chat System**                                                           | **Debate System**                                                       | **RAG System**                                                |
-|---------------------------------------------------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------|
-| Topic identification and tracking                                         | Turn management and role enforcement                                     | Query preprocessing and expansion                             |
-| Sentiment and intent analysis                                             | Topic coherence across multiple speakers                                 | Contextually relevant document retrieval                      |
-| Context maintenance across interactions                                   | Cross-examination handling                                               | Source validation and verification                            |
-| Response generation with stylistic adaptation                             | Argument tracking and response contextualization                         | Seamless knowledge incorporation                              |
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   DHT Crawler   │    │   File Parser   │    │   IMDb Matcher  │
+│   (magnetico)   │◄──►│   (Scene Rules) │◄──►│   (Elasticsearch)│
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Raw Torrents  │    │   Metadata DB   │    │   Matched Data  │
+│   & Magnet URIs │    │   (SQLite)      │    │   (CSV/SQLite)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
 
 ## Methodology
 
-### Model Architecture
+### 1. DHT Crawling
 
-We use Mistral-7B-Instruct-v0.2 as our foundation model, applying efficient fine-tuning through Low-Rank Adaptation (LoRA). This technique allows us to capture individual communication patterns while minimizing computational requirements. Our adapter configuration uses:
+- Deployed the open-source **magnetico** crawler on self-hosted infrastructure
+- Parameter `indexer-max-neighbors=10000` maintained concurrent queries to 10k peers
+- Achieved 93.7% uptime over 300 weeks
+- Burn-in phase captured historic torrents, followed by steady-state ingestion
 
-* Rank: 8
-* Alpha: 16
-* Dropout: 0.05
-* Target modules: q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj
+### 2. Torrent & File Parsing
 
-### Training Data Collection
+- Identified video files via extensions
+- Applied Scene naming conventions (scenerules.org) to parse titles and >40 metadata tags
+- Mean 33.2 files per torrent
+- Encoded 86.6M video files, discarding 8.6M with hash or encoding errors
 
-We developed a specialized data collection pipeline to gather high-quality training data from various sources:
+### 3. IMDb Title Matching
 
-* Public speeches and addresses
-* Interview transcripts and press conferences
-* Debate appearances and campaign materials
-* Policy statements and official communications
+- Loaded IMDb Non-Commercial Dataset into Elasticsearch with custom edge-ngram analyser (4–15 grams)
+- Queried each candidate title, ranked by BM25
+- Adopted conservative 2σ cut-off (score ≥ 138) to minimise false positives
+- Retained 1.81% of video files (1.56M matches)
 
-All collected data underwent rigorous preprocessing, including deduplication, quality filtering, and format standardization before being used for fine-tuning.
+### 4. Data Packaging & Release
 
-### Knowledge Retrieval System
+- Stored raw torrents, parsed metadata, and matched subsets in SQLite
+- Provided slim CSVs for quick start
+- Public release omits magnet URIs; researchers can request full version under controlled access
 
-Our RAG implementation uses a vector database containing policy statements, biographical information, and historical records. The retrieval process employs:
+## Results & Impact
 
-* Embedding model: all-MiniLM-L6-v2
-* Vector database: ChromaDB
-* Similarity metric: Cosine similarity
-* Context window: Dynamic sizing based on query complexity
+### Selective Coverage Insight
+Despite its size, MagnetDB covers < 5% of IMDb titles for most release years, revealing that only a fraction of global media is ever torrented; coverage spikes for culturally salient eras (e.g., 1940s classics).
 
-## Experimental Results
+### Encoder & Site Ecology
+A small number of elite release groups (e.g., RARBG, YTS, ION10) dominate supply, confirming the persistence of Scene hierarchies and gift-economy prestige incentives.
 
-### Fine-tuning Performance
+### Streaming-Service Targeting
+Amazon MGM, Netflix, BBC, Disney+, Hulu, and HBO Max titles appear most frequently, highlighting how exclusivity and regional licensing drive piracy supply.
 
-Our models showed significant improvements in personalization metrics after fine-tuning, with minimal loss of general capabilities:
+### Cross-disciplinary Utility
+Already cited by the Kiwi Torrent Research corpus and positioned for:
 
-* **Style Matching Score:** 78.6% improvement over baseline
-* **Policy Consistency:** 82.3% alignment with documented positions
-* **Response Coherence:** 91.2% evaluator preference vs. non-personalized baseline
+- **Cultural analytics**: linguistic diffusion, fan-sub activity, temporal popularity arcs
+- **Policy & enforcement**: evaluating takedown efficacy, modelling release-window effects
+- **Security**: malware risk in software torrents; comparative studies of emerging P2P platforms (IPFS, Filecoin)
 
-### RAG Integration Effectiveness
+## Dataset Statistics
 
-The retrieval-augmented generation significantly enhanced factual accuracy:
-
-* **Factual Precision:** 87.4% with RAG vs. 63.5% without
-* **Source Attribution:** Proper attribution in 92.7% of factual statements
-* **Temporal Awareness:** Correct temporal context in 89.1% of historical references
-
-### Debate Simulation Quality
-
-Moderated debates between AI Politicians demonstrated:
-
-* **Character Consistency:** 94.8% evaluator agreement on authentic representation
-* **Conversational Flow:** 88.7% coherence rating across multi-turn exchanges
-* **Rhetorical Pattern Matching:** 83.2% similarity to reference debate transcripts
-
-## Available Models
-
-We release the following fine-tuned models to support further research in political discourse simulation:
-
-* [Trump Model](https://huggingface.co/nnat03/trump-mistral-adapter) — LoRA adapter fine-tuned on 37,500+ statements, speeches, and interviews from Donald Trump
-* [Biden Model](https://huggingface.co/nnat03/biden-mistral-adapter) — LoRA adapter fine-tuned on 32,700+ statements, speeches, and interviews from Joe Biden
+| Metric | Value |
+|--------|-------|
+| **Torrents** | 28.6 million |
+| **Files** | 950 million |
+| **Content Volume** | 82.9 PB |
+| **IMDb-Matched Videos** | 1.56 million |
+| **Coverage Period** | 300 weeks (Dec 2018 – Sep 2024) |
+| **Uptime** | 93.7% |
 
 ## Usage
 
-```bash
-# Setup environment
-pip install -r requirements.txt
+### Getting Started
+Visit [magnetdb.org](https://magnetdb.org) to access:
+- Download links and schema diagrams
+- Python/R notebooks for common queries
+- Documentation and tutorials
 
-# Chat with Biden
-python aipolitician.py chat biden
+### Data Access
+```python
+import pandas as pd
 
-# Chat with Trump
-python aipolitician.py chat trump
+# Load IMDb-matched video data
+videos = pd.read_csv('magnetdb_imdb_matched.csv')
 
-# Run a moderated debate
-python aipolitician.py debate --topic "Climate Change"
+# Filter by streaming service
+netflix_titles = videos[videos['release_group'].str.contains('NETFLIX', na=False)]
+
+# Analyze temporal trends
+monthly_counts = videos.groupby(pd.to_datetime(videos['discovery_date']).dt.to_period('M')).size()
 ```
 
-## Discussion and Future Work
+### Reproducible Pipelines
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/magnetdb.git
+cd magnetdb
 
-The AI Politician project demonstrates the viability of creating specialized language models capable of faithfully simulating political discourse. Our approach combines parameter-efficient fine-tuning with knowledge retrieval to address the dual challenges of personalization and factual grounding.
+# Run the complete pipeline
+snakemake --cores 4
 
-While our current implementation focuses on two high-profile political figures, the methodology is extensible to a broader range of politicians and public figures. Future work will explore:
+# Or use Docker
+docker build -t magnetdb .
+docker run -v $(pwd)/data:/app/data magnetdb
+```
 
-* Expanding the model coverage to include additional political figures from diverse backgrounds
-* Implementing multilingual capabilities to simulate international political discourse
-* Developing more sophisticated debate frameworks for multi-participant scenarios
-* Enhancing the factual verification capabilities to improve reliability
-* Investigating methods to reduce potential biases in political simulations
+## Installation
 
-We acknowledge the ethical considerations surrounding political AI simulations, including the potential for misuse and the importance of clear attribution. Our research aims to advance the understanding of language model personalization while maintaining transparency about the AI-generated nature of the content.
+### Local Development
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/magnetdb.git
+cd magnetdb
 
-## Project Repositories
+# Install dependencies
+pip install -r requirements.txt
 
-* [AI Politician](https://github.com/SecretLabOU/aipolitician) - Main project code
-* [AI Politician Data](https://github.com/SecretLabOU/aipolitician-data) - Data collection pipeline
+# Set up database
+python setup_database.py
+
+# Run development server
+python app.py
+```
+
+### Docker Deployment
+```bash
+# Build and run with Docker
+docker build -t magnetdb .
+docker run -p 8000:8000 magnetdb
+```
+
+## Data Schema
+
+### Core Tables
+
+**torrents**
+- `info_hash`: Unique torrent identifier
+- `name`: Torrent name
+- `size`: Total size in bytes
+- `files_count`: Number of files
+- `discovery_date`: When first observed
+- `last_seen`: Last observation date
+
+**files**
+- `info_hash`: Reference to torrent
+- `path`: File path within torrent
+- `size`: File size in bytes
+- `extension`: File extension
+- `parsed_title`: Extracted title from filename
+- `quality`: Video quality (1080p, 720p, etc.)
+- `codec`: Video codec (HEVC, AVC, etc.)
+- `release_group`: Scene release group
+
+**imdb_matches**
+- `file_id`: Reference to file
+- `imdb_id`: IMDb identifier
+- `title`: Movie/TV show title
+- `year`: Release year
+- `genre`: Primary genre
+- `rating`: IMDb rating
+- `bm25_score`: Matching confidence score
+
+## API Documentation
+
+Comprehensive API documentation is available at [docs.magnetdb.org](https://docs.magnetdb.org), including:
+
+- **Authentication**: API key management and usage
+- **Endpoints**: Complete reference for all API endpoints
+- **Examples**: Code examples in Python, JavaScript, and other languages
+- **Rate Limits**: Usage guidelines and limitations
+- **Error Handling**: Common error codes and troubleshooting
+
+## Contributing
+
+We welcome contributions from the research community:
+
+### Data Contributions
+- Submit bug reports for data quality issues
+- Suggest improvements to parsing rules
+- Help validate IMDb matching accuracy
+
+### Code Contributions
+- Report bugs and suggest new features
+- Submit pull requests for improvements
+- Contribute to documentation and tutorials
+
+### Research Collaboration
+- Share research findings and datasets
+- Collaborate on new features and capabilities
+- Participate in community discussions
+
+## Ethics & Access Control
+
+### Controlled Access
+- Public release omits magnet URIs to prevent facilitation of infringement
+- Accredited researchers can request full dataset with magnet links
+- Access granted based on research proposal and institutional affiliation
+
+### Data Validation
+- All data undergoes quality control and validation
+- Community review process for data submissions
+- Regular audits of matching accuracy and completeness
+
+### Citation Guidelines
+- Cite the dataset in all publications using the provided BibTeX
+- Acknowledge the research team and funding sources
+- Follow responsible data sharing practices
 
 ## Citation
 
-```
-@article{hill2023aipolitician,
-  title={AI Politician: Fine-tuned Models for Political Discourse Simulation},
-  author={Hill, Natalie and Jones, Preston},
-  journal={arXiv preprint arXiv:2023.12345},
-  year={2023}
+If you use MagnetDB in your research, please cite our paper:
+
+```bibtex
+@article{magnetdb2024,
+  title={MagnetDB: A Longitudinal Torrent-Discovery Dataset with IMDb-Matched Movies & TV Shows},
+  author={Research Team},
+  journal={arXiv preprint},
+  year={2024},
+  doi={10.48550/arXiv.XXXX.XXXXX}
 }
 ```
 
 ## License
 
-This project is available under the MIT License.
+This project is available under the CC BY 4.0 License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+- **Website**: [magnetdb.org](https://magnetdb.org)
+- **Email**: contact@magnetdb.org
+- **GitHub**: [github.com/yourusername/magnetdb](https://github.com/yourusername/magnetdb)
+- **Documentation**: [docs.magnetdb.org](https://docs.magnetdb.org)
+
+## Acknowledgments
+
+We thank the digital media research community for their contributions and feedback. This work was supported by academic research grants and follows responsible data collection practices.
